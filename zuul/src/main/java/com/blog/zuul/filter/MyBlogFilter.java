@@ -1,6 +1,7 @@
 package com.blog.zuul.filter;
 
 import com.netflix.zuul.context.RequestContext;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -31,26 +32,23 @@ public class MyBlogFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return true;
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+
+        final String servletPath = request.getServletPath();
+        if(StringUtils.startsWith(servletPath,"/webs/")){
+            return true;
+        }else if(StringUtils.startsWith(servletPath,"/webAuth/")){
+            return false;
+        }
+        throw new RuntimeException();
     }
 
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
-        Object accessToken = request.getParameter("token");
-        if(accessToken == null) {
-            log.warn("token is empty");
-            ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(401);
-            try {
-                ctx.getResponse().getWriter().write("token is empty");
-            }catch (Exception e){}
 
-            return null;
-        }
-        log.info("ok");
         return null;
     }
 }
