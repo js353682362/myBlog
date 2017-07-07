@@ -8,13 +8,21 @@
     <option name="pathToConfigFileJava" value="E:/formatter.xml" />
     <option name="selectedJavaProfile" value="rib Conventions" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/b-web" />
+    <file type="web" url="file://$PROJECT_DIR$/web" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/system/pom.xml" />
         <option value="$PROJECT_DIR$/zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/web/src/main/pom.xml" />
+        <option value="$PROJECT_DIR$/web/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
