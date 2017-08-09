@@ -5,11 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.blog.webs.httpclient.MyBlogClient;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +28,25 @@ public class CommonController {
 
     @Autowired
     private MyBlogClient myBlogClient;
+
+    @RequestMapping(value = "/")
+    public String root(){
+        return "index";
+    }
+
+
+
+    /**
+     * 跳转界面
+     *
+     * @param toPage
+     * @return
+     */
+    @RequestMapping(value = "/toPage", method = RequestMethod.GET)
+    public String toPage(@RequestParam("toPage") String toPage) {
+        return toPage;
+    }
+
 
     private String postJsonRequest(HttpServletRequest request) {
         return myBlogClient.postRequest(request, makeRequestObject(request));
