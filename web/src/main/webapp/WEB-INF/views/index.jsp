@@ -4,6 +4,9 @@
     <title>Title</title>
 </head>
 <body>
-abcdefghijklmnopqrstuvwxyz
+scheme : <%=request.getScheme() %><br/>
+serverName : <%=request.getServerName() %><br/>
+serverPort : <%=request.getServerPort() %><br/>
+contextPath :  <%=request.getContextPath()%>
 </body>
 </html>
