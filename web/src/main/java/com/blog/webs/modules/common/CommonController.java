@@ -1,17 +1,15 @@
 package com.blog.webs.modules.common;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
+import com.blog.webs.httpclient.MyBlogClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.blog.webs.httpclient.MyBlogClient;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -29,11 +27,14 @@ public class CommonController {
     private MyBlogClient myBlogClient;
 
     @RequestMapping(value = "/")
-    public String root(){
+    public String root() {
         return "index";
     }
 
-
+    @RequestMapping(value = "/auth/login")
+    public String login() {
+        return "/auth/login";
+    }
 
     /**
      * 跳转界面
@@ -46,25 +47,24 @@ public class CommonController {
         return toPage;
     }
 
-
     private String postJsonRequest(HttpServletRequest request) {
         return myBlogClient.postRequest(request, makeRequestObject(request));
     }
 
-    public String makeRequestObject(ServletRequest request){
+    public String makeRequestObject(ServletRequest request) {
         int contentLength = request.getContentLength();
         byte buffer[] = new byte[contentLength];
         InputStream inputStream = null;
-        try{
+        try {
             inputStream = request.getInputStream();
-            for(int i = 0; i < contentLength;){
-                int readLength = inputStream.read(buffer,i,contentLength - i);
-                if(readLength == -1){
+            for (int i = 0; i < contentLength;) {
+                int readLength = inputStream.read(buffer, i, contentLength - i);
+                if (readLength == -1) {
                     break;
                 }
                 i += readLength;
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException();
         } finally {
             if (inputStream != null) {
@@ -75,17 +75,18 @@ public class CommonController {
             }
         }
         String charEncoding = request.getCharacterEncoding();
-        if(StringUtils.isBlank(charEncoding)){
+        if (StringUtils.isBlank(charEncoding)) {
             charEncoding = "UTF-8";
         }
         try {
-            return new String(buffer,charEncoding);
+            return new String(buffer, charEncoding);
         } catch (UnsupportedEncodingException e) {
-          throw new RuntimeException();
+            throw new RuntimeException();
         }
     }
 
-    @RequestMapping(value = "/web/*/**/*", method = RequestMethod.POST, consumes = {"application/json" })
+    @RequestMapping(value = "/web/*/**/*", method = RequestMethod.POST, consumes = {
+            "application/json" })
     public String do_post(HttpServletRequest request) {
         return postJsonRequest(request);
     }
