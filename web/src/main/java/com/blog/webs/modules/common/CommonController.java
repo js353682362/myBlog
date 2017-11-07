@@ -36,6 +36,11 @@ public class CommonController {
         return "/auth/login";
     }
 
+    @RequestMapping(value = "/test")
+    public String test() {
+        return "test";
+    }
+
     /**
      * 跳转界面
      *
