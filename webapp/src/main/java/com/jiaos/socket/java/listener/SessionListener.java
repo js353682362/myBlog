@@ -11,7 +11,9 @@ import java.util.EventListener;
  * @version: Version 1.0
  */
 public interface SessionListener extends EventListener {
-    void processEvent(SessionEvent sessionEvent);
+    void processEvent();
+
+    void initEvent(SessionEvent sessionEvent);
     /**
      * 设置触发事件名称
      * @param eventName

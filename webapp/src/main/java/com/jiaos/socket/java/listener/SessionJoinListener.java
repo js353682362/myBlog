@@ -2,6 +2,7 @@ package com.jiaos.socket.java.listener;
 
 import com.jiaos.socket.java.anno.SessionListenerAnno;
 import com.jiaos.socket.java.event.SessionEvent;
+import com.jiaos.socket.java.event.SessionJoinEvent;
 
 /**
  * @（#）:SessionJoinListener.java
@@ -10,17 +11,20 @@ import com.jiaos.socket.java.event.SessionEvent;
  * @version: Version 1.0
  */
 @SessionListenerAnno
-public class SessionJoinListener implements SessionListener{
+public class SessionJoinListener implements SessionListener {
 
     private String eventName;
 
-    public SessionJoinListener() {
-        this.setEventName("__join");
+    private SessionJoinEvent sessionJoinEvent;
+
+    @Override
+    public void processEvent() {
+
     }
 
     @Override
-    public void processEvent(SessionEvent sessionEvent) {
-
+    public void initEvent(SessionEvent sessionEvent) {
+        this.sessionJoinEvent = (SessionJoinEvent) sessionEvent;
     }
 
     /**
