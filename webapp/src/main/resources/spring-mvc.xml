@@ -9,6 +9,7 @@
 
     <!--容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>
+    <!--和default-servlet-handler成对出现-->
     <mvc:annotation-driven/>
     <!-- 扫描注解 过滤掉Service和Repository，只扫描Controller -->
     <context:component-scan base-package="com.jiaos.controller" use-default-filters="false">
@@ -20,8 +21,6 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
 
     <!--配置上传文件数据解析-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

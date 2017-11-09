@@ -46,6 +46,9 @@ public class MyTest {
             if(clazz.isAnnotationPresent(Tttttsss.class)){
                 System.out.println("success");
             }
+
+            int ANNOTATION= 0x00002000;
+            System.out.println("sssssss+" +  ANNOTATION);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
