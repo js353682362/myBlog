@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>ascii camera</title>
+	<meta charset="utf-8" />
+ 	<link rel="stylesheet" th:href="@{css/main.css}"/>
+</head>
+<body>
+	<h1 id="info">请允许当前页面调用你的摄像头.</h1>
+
+	<div id="notSupported">
+		<h1>你的浏览器不能调取摄像头.</h1>
+		<img th:src="@{images/screenshot.png}" align="center" />
+	</div>
+
+	<pre id="ascii"></pre>
+	<button id="pause">暂停 / 继续</button>
+
+	<script th:src="@{js/ascii/camera.js}"></script>
+	<script th:src="@{js/ascii/ascii.js}"></script>
+	<script th:src="@{js/ascii/app.js}"></script>
+</body>
+</html>
